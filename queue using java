@@ -1,0 +1,105 @@
+public class QueueUsingArray {
+    static final int MAX = 100;
+    static String[] queue = new String[MAX];
+    static int front = 0;
+    static int rear = -1;
+
+    // Enqueue operation
+    static void enqueue(String item) {
+        if (rear == MAX - 1) {
+            System.out.println("Queue Overflow");
+        } else {
+            rear++;
+            queue[rear] = item;
+        }
+    }
+
+    // Dequeue operation
+    static String dequeue() {
+        if (front > rear) {
+            System.out.println("Queue Underflow");
+            return null;
+        } else {
+            String item = queue[front];
+            front++;
+            return item;
+        }
+    }
+
+    // Display the queue
+    static void displayQueue() {
+        if (front > rear) {
+            System.out.println("Queue is empty");
+        } else {
+            System.out.print("[");
+            for (int i = front; i <= rear; i++) {
+                System.out.print(queue[i]);
+                if (i < rear) System.out.print(", ");
+            }
+            System.out.println("]");
+        }
+    }
+
+    // Check if an item is in the queue
+    static boolean contains(String item) {
+        for (int i = front; i <= rear; i++) {
+            if (queue[i].equals(item)) return true;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        // Initial Queue
+        enqueue("Compiler");
+        enqueue("Firewall");
+        enqueue("Algorithm");
+        enqueue("Protocol");
+        enqueue("Cache");
+
+        System.out.println("Initial Queue:");
+        displayQueue();
+
+        // Question 1: Two Dequeue operations
+        String dq1 = dequeue();
+        String dq2 = dequeue();
+        System.out.println("\nAfter 2 Dequeues:");
+        System.out.println("Dequeued: " + dq1 + ", " + dq2);
+        displayQueue();
+
+        // Question 2: Enqueue "Virtualization"
+        enqueue("Virtualization");
+        System.out.println("\nAfter Enqueue 'Virtualization':");
+        displayQueue();
+
+        // Question 3: One Dequeue
+        String dq3 = dequeue();
+        System.out.println("\nAfter 1 Dequeue:");
+        System.out.println("Dequeued: " + dq3);
+        displayQueue();
+
+        // Question 4: Enqueue "Cloud"
+        enqueue("Cloud");
+        System.out.println("\nAfter Enqueue 'Cloud':");
+        displayQueue();
+
+        // Question 5: Check if "Protocol" is present
+        boolean found = contains("Protocol");
+        System.out.println("\nIs 'Protocol' present? " + (found ? "Yes" : "No"));
+
+        // Question 6: Enqueue "Machine Learning"
+        enqueue("Machine Learning");
+        System.out.println("\nAfter Enqueue 'Machine Learning':");
+        displayQueue();
+
+        // Question 7: Final Dequeue
+        String dq4 = dequeue();
+        System.out.println("\nAfter Final Dequeue:");
+        System.out.println("Dequeued: " + dq4);
+        displayQueue();
+
+        // Question 8: Concept Check
+        System.out.println("\nConcept Check:");
+        System.out.println("Element at position 3 (Algorithm) dequeued in Step 3");
+        System.out.println("Element at position 4 (Protocol) dequeued in Step 7");
+    }
+} 
