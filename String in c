@@ -1,0 +1,152 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    printf("=== Level 1: Basic String Operations ===\n");
+
+    // 1. Length Calculation
+    char brand1[] = "Lenovo";
+    printf("1. Length of '%s': %lu\n", brand1, strlen(brand1));
+
+    // 2. Concatenation
+    char b1[20] = "Dell";
+    char b2[] = "HP";
+    strcat(b1, b2);
+    printf("2. Concatenated String: %s\n", b1);
+
+    // 3. Character Access
+    char brand3[] = "Asus";
+    printf("3. 2nd character in '%s': %c\n", brand3, brand3[1]);
+
+    // 4. Traversal
+    char brand4[] = "Apple";
+    printf("4. Characters in '%s':\n", brand4);
+    for (int i = 0; brand4[i] != '\0'; i++) {
+        printf("%c\n", brand4[i]);
+    }
+
+    // 5. Uppercase Conversion
+    char brand5[] = "acer";
+    for (int i = 0; brand5[i] != '\0'; i++) {
+        brand5[i] = toupper(brand5[i]);
+    }
+    printf("5. Uppercase: %s\n", brand5);
+
+    printf("\n=== Level 2: Intermediate String Operations ===\n");
+
+    // 6. Reverse a Brand Name
+    char brand6[] = "MSI";
+    printf("6. Reversed '%s': ", brand6);
+    for (int i = strlen(brand6) - 1; i >= 0; i--) {
+        printf("%c", brand6[i]);
+    }
+    printf("\n");
+
+    // 7. Search for a Substring
+    char sentence1[] = "Popular brands are Dell, HP, and Lenovo";
+    if (strstr(sentence1, "Dell")) {
+        printf("7. 'Dell' found in sentence.\n");
+    } else {
+        printf("7. 'Dell' not found.\n");
+    }
+
+    // 8. Count Occurrence
+    char sentence2[] = "HP, HP, Lenovo, Dell";
+    int count = 0;
+    char *ptr = sentence2;
+    while ((ptr = strstr(ptr, "HP")) != NULL) {
+        count++;
+        ptr += 2;
+    }
+    printf("8. 'HP' appears %d times.\n", count);
+
+    // 9. Sorting Brand Names
+    char brands9[4][20] = {"Lenovo", "Dell", "HP", "Asus"};
+    char temp[20];
+    for (int i = 0; i < 4; i++) {
+        for (int j = i + 1; j < 4; j++) {
+            if (strcmp(brands9[i], brands9[j]) > 0) {
+                strcpy(temp, brands9[i]);
+                strcpy(brands9[i], brands9[j]);
+                strcpy(brands9[j], temp);
+            }
+        }
+    }
+    printf("9. Sorted Brands:\n");
+    for (int i = 0; i < 4; i++) {
+        printf("%s\n", brands9[i]);
+    }
+
+    // 10. Replace Brand Name
+    char sentence3[] = "Apple is a premium brand";
+    char updated[50];
+    strcpy(updated, sentence3);
+    char *pos = strstr(updated, "Apple");
+    if (pos != NULL) {
+        strncpy(pos, "MSI  ", 5); // Replace "Apple" with "MSI"
+    }
+    printf("10. Updated Sentence: %s\n", updated);
+
+    printf("\n=== Level 3: Advanced String Operations ===\n");
+
+    // 11. Palindrome Check
+    char brand11[] = "MSI";
+    int len = strlen(brand11), isPal = 1;
+    for (int i = 0; i < len / 2; i++) {
+        if (brand11[i] != brand11[len - 1 - i]) {
+            isPal = 0;
+            break;
+        }
+    }
+    printf("11. '%s' is %sa palindrome.\n", brand11, isPal ? "" : "not ");
+
+    // 12. Unique Characters
+    char brand12[] = "Lenovo";
+    int unique[256] = {0};
+    printf("12. Unique characters in '%s': ", brand12);
+    for (int i = 0; brand12[i] != '\0'; i++) {
+        if (!unique[(unsigned char)brand12[i]]) {
+            printf("%c ", brand12[i]);
+            unique[(unsigned char)brand12[i]] = 1;
+        }
+    }
+    printf("\n");
+
+    // 13. Longest Brand Name
+    char brands13[][20] = {"Dell", "HP", "Lenovo", "Asus", "Apple", "MSI"};
+    char longest[20];
+    int maxLen = 0;
+    for (int i = 0; i < 6; i++) {
+        int l = strlen(brands13[i]);
+        if (l > maxLen) {
+            maxLen = l;
+            strcpy(longest, brands13[i]);
+        }
+    }
+    printf("13. Longest brand: %s\n", longest);
+
+    // 14. String Matching (Prefix)
+    char brands14[][20] = {"Dell", "HP", "Lenovo", "Asus"};
+    printf("14. Brands starting with 'A':\n");
+    for (int i = 0; i < 4; i++) {
+        if (brands14[i][0] == 'A') {
+            printf("%s\n", brands14[i]);
+        }
+    }
+
+    // 15. Frequency Map
+    char brand15[] = "Apple";
+    int freq[256] = {0};
+    for (int i = 0; brand15[i] != '\0'; i++) {
+        freq[(unsigned char)brand15[i]]++;
+    }
+    printf("15. Character Frequency in '%s':\n", brand15);
+    for (int i = 0; i < 256; i++) {
+        if (freq[i] > 0) {
+            printf("%c: %d\n", i, freq[i]);
+        }
+    }
+
+    return 0;
+}
